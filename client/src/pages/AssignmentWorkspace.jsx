@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import SqlEditor from '../components/SqlEditor';
 
 const AssignmentWorkspace = () => {
@@ -14,7 +14,7 @@ const AssignmentWorkspace = () => {
 
     useEffect(() => {
         const fetchAssignment = async () => {
-            const res = await axios.get(`/api/assignments/${id}`);
+            const res = await api.get(`/api/assignments/${id}`);
             setAssignment(res.data);
         };
         fetchAssignment();
@@ -24,7 +24,7 @@ const AssignmentWorkspace = () => {
         setError('');
         setResults(null);
         try {
-            const res = await axios.post('/api/assignments/execute', {
+            const res = await api.post('/api/assignments/execute', {
                 query,
                 workspaceId: assignment.workspaceId,
             });
@@ -38,7 +38,7 @@ const AssignmentWorkspace = () => {
         setLoadingHint(true);
         setHint('');
         try {
-            const res = await axios.post('/api/assignments/hint', {
+            const res = await api.post('/api/assignments/hint', {
                 query,
                 assignment,
                 error: error || undefined,
