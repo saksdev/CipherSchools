@@ -20,7 +20,16 @@ const executeQuery = async (req, res) => {
         return res.status(400).json({ error: 'Invalid workspace ID.' });
     }
 
-    const client = await pool.connect();
+    let client;
+    try {
+        client = await pool.connect();
+    } catch (err) {
+        console.error('PostgreSQL connection error:', err);
+        return res.status(500).json({
+            error: `Database connection failed. Please ensure your DATABASE_URL is correct and Supabase allows connections from Render's IP. Original error: ${err.message}`
+        });
+    }
+
     try {
         await client.query('BEGIN');
 
