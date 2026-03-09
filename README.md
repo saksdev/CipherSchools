@@ -17,30 +17,6 @@ A browser-based SQL learning platform for students to practice SQL queries again
 - **AI Integration**: Google Gemini API
 - **Editor**: Monaco Editor
 
-## 📊 Data-Flow Diagram (Compulsory)
-This diagram illustrates the flow when a user clicks **"Execute Query"**.
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend as React (Vite)
-    participant Backend as Node/Express
-    participant PG as PostgreSQL (Supabase)
-    participant Mongo as MongoDB (Assignments)
-
-    User->>Frontend: Clicks "Execute Query"
-    Frontend->>Frontend: Captures query from Monaco Editor
-    Frontend->>Backend: POST /api/assignments/execute (query, workspaceId)
-    Backend->>Backend: Sanitizes query (blocks DROP/DELETE/etc.)
-    Backend->>PG: SET LOCAL search_path TO "workspaceId"
-    Backend->>PG: Executes SQL query
-    PG-->>Backend: Returns query result rows/columns
-    Backend->>Backend: Executes ROLLBACK (preserves sandbox data)
-    Backend-->>Frontend: JSON response (results or error message)
-    Frontend->>Frontend: Updates React state (setResults)
-    Frontend-->>User: Renders results in formatted table
-```
-
 ## ⚙️ Installation & Setup
 
 ### 1. Prerequisites
