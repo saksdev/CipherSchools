@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Link } from 'react-router-dom';
 
 const AssignmentList = () => {
@@ -9,7 +9,7 @@ const AssignmentList = () => {
     useEffect(() => {
         const fetchAssignments = async () => {
             try {
-                const res = await axios.get('/api/assignments');
+                const res = await api.get('/api/assignments');
                 setAssignments(res.data);
             } catch (err) {
                 console.error('Failed to fetch assignments:', err);
