@@ -1,0 +1,230 @@
+@forward 'partials/variables';
+@forward 'partials/mixins';
+@forward 'partials/base';
+@forward 'partials/components';
+
+@use 'partials/variables' as *;
+@use 'partials/mixins' as *;
+
+// Layout & Pages
+.assignment-list {
+    &__header {
+        text-align: center;
+        margin-bottom: 3rem;
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: $text-muted;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
+
+        @include tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include laptop {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+.assignment-card {
+    background-color: $sidebar-bg;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s, border-color 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: $primary-color;
+    }
+
+    &__badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 99px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+
+        &--easy {
+            background: rgba($success, 0.2);
+            color: $success;
+        }
+
+        &--medium {
+            background: rgba($warning, 0.2);
+            color: $warning;
+        }
+
+        &--hard {
+            background: rgba($error, 0.2);
+            color: $error;
+        }
+    }
+
+    &__title {
+        margin-bottom: 0.5rem;
+    }
+
+    &__question {
+        color: $text-muted;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.workspace {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+
+    @include laptop {
+        grid-template-columns: 350px 1fr;
+    }
+
+    &__left {
+        background-color: $sidebar-bg;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        height: fit-content;
+    }
+
+    &__question {
+        margin-bottom: 2rem;
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: $text-muted;
+        }
+    }
+
+    &__schemas {
+        h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .table-schema {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+
+            ul {
+                list-style: none;
+                margin-top: 0.5rem;
+                padding-left: 0.5rem;
+            }
+
+            li {
+                font-size: 0.85rem;
+                color: $text-muted;
+                border-left: 2px solid $primary-color;
+                padding-left: 0.5rem;
+                margin-bottom: 0.25rem;
+            }
+        }
+    }
+
+    &__results {
+        margin-top: 2rem;
+        overflow-x: auto;
+    }
+
+    &__actions {
+        margin: 1rem 0;
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+.sql-editor {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &__header {
+        background: #1e1e1e;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        span {
+            font-size: 0.9rem;
+            color: $text-muted;
+        }
+    }
+}
+
+.hint-box {
+    background: rgba($primary-color, 0.1);
+    border-left: 4px solid $primary-color;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $sidebar-bg;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    th,
+    td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    th {
+        background: rgba(0, 0, 0, 0.2);
+        color: $text-muted;
+        font-weight: 600;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+}
+
+.result-error {
+    color: $error;
+    background: rgba($error, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-family: monospace;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

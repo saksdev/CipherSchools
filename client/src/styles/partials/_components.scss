@@ -1,0 +1,54 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+
+    &--primary {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+            background-color: $secondary-color;
+            transform: translateY(-1px);
+        }
+    }
+
+    &--secondary {
+        background: transparent;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+
+        &:hover {
+            background: rgba($primary-color, 0.1);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.navbar {
+    background-color: $sidebar-bg;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+
+    &__logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, $primary-color, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
