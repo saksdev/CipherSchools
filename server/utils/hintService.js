@@ -1,7 +1,12 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const geminiKey = process.env.GEMINI_API_KEY ||
+    process.env.GEMINI_API_URL ||
+    process.env.GEMINI_APT_KEY ||
+    process.env.GEMINT_APT_KEY;
+
+const genAI = new GoogleGenerativeAI(geminiKey);
 
 const systemInstruction = `You are an expert SQL tutor helping students learn SQL. 
 Your role is to provide helpful hints WITHOUT giving away the full answer.
