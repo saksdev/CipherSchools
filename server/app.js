@@ -11,18 +11,16 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(helmet({
-    contentSecurityPolicy: false // Disable CSP temporarily for easier cross-origin debugging
+app.use(helmet());
+app.use(cors({
+    origin: [
+        'http://localhost:5173',
+        process.env.FRONTEND_URL,
+        process.env.FRONTEND_URI
+    ].filter(Boolean),
+    credentials: true
 }));
-
-app.use(cors()); // Allow all origins temporarily for debugging
 app.use(express.json());
-
-// Request logging for debugging
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-    next();
-});
 
 // Routes
 app.use('/api/assignments', assignmentRoutes);

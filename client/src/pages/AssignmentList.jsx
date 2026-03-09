@@ -25,19 +25,13 @@ const AssignmentList = () => {
     if (loading) return <div className="loading container">Loading assignments...</div>;
 
     if (error) return (
-        <div className="container" style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <div className="container" style={{ textAlign: 'center', marginTop: '4rem' }}>
             <div className="result-error" style={{ display: 'inline-block', padding: '2rem' }}>
                 <h3>Connection Error</h3>
-                <p style={{ color: '#ef4444', fontWeight: 'bold' }}>{error}</p>
-                <div style={{ marginTop: '1.5rem', textAlign: 'left', background: '#1e293b', padding: '1rem', borderRadius: '8px', fontSize: '0.85rem' }}>
-                    <p><strong>Diagnostic Info:</strong></p>
-                    <p style={{ color: '#94a3b8' }}>Attempting to connect to:</p>
-                    <code style={{ color: '#38bdf8', display: 'block', margin: '0.5rem 0' }}>{api.defaults.baseURL}</code>
-                    <p style={{ color: '#94a3b8', marginTop: '1rem' }}>
-                        If the URL above is <code>localhost</code>, your Vercel Environment Variables are not being applied.
-                        Make sure to <strong>Redeploy</strong> after adding them.
-                    </p>
-                </div>
+                <p style={{ color: '#ef4444', marginTop: '1rem' }}>{error}</p>
+                <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '1.5rem' }}>
+                    Please check your internet connection or verify the backend server status.
+                </p>
             </div>
         </div>
     );
