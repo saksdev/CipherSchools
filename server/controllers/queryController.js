@@ -25,8 +25,19 @@ const executeQuery = async (req, res) => {
         client = await pool.connect();
     } catch (err) {
         console.error('PostgreSQL connection error:', err);
+        
+        let customError = `Database connection failed. Original error: ${err.message}`;
+        
+        // Detection for Render + IPv6 / ENETUNREACH issue
+        if (err.code === 'ENETUNREACH' || err.message.includes('ENETUNREACH') || err.message.includes(':')) {
+            customError = `Database connection failed (ENETUNREACH). This usually happens on Render because it doesn't support IPv6. 
+            
+Please update your DATABASE_URL in Render to use the Supabase Connection Pooler (which uses IPv4). 
+Look for a URL like: postgres://postgres.xxxxxx@aws-0-us-east-1.pooler.supabase.com:5432/postgres?pgbouncer=true`;
+        }
+
         return res.status(500).json({
-            error: `Database connection failed. Please ensure your DATABASE_URL is correct and Supabase allows connections from Render's IP. Original error: ${err.message}`
+            error: customError
         });
     }
 
